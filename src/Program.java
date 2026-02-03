@@ -4,16 +4,19 @@ public class Program {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter Arm Precision (0.0 - 1.0):");
         double armPrecision = sc.nextDouble();
-
-        System.out.println("Enter Worker Density (1 - 20):");
         int workerDensity = sc.nextInt();
         sc.nextLine();
-
-        System.out.println("Enter Machinery State (Worn/Faulty/Critical):");
         String machineryState = sc.nextLine();
 
-        System.out.println(armPrecision + " " + workerDensity + " " + machineryState);
+        double factor = 0;
+
+        if (machineryState.equals("Worn")) factor = 1.3;
+        if (machineryState.equals("Faulty")) factor = 2.0;
+        if (machineryState.equals("Critical")) factor = 3.0;
+
+        double risk = ((1.0 - armPrecision) * 15.0) + (workerDensity * factor);
+
+        System.out.println("Robot Hazard Risk Score: " + risk);
     }
 }
